@@ -1,5 +1,6 @@
 package com.arctouch.codechallenge.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -16,9 +17,19 @@ class HomeActivity : AppCompatActivity() {
 
   private val service: TmdbApi = RetrofitConfig().apiService
 
+  @SuppressLint("CheckResult")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.home_activity)
+
+    service.genres(
+        Constants.API_KEY,
+        Constants.DEFAULT_LANGUAGE)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe {
+          Cache.cacheGenres(it.genres)
+        }
 
     service.upcomingMovies(
         Constants.API_KEY,

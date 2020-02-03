@@ -2,8 +2,8 @@ package com.arctouch.codechallenge.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.data.Cache
 import com.arctouch.codechallenge.data.retrofit.TmdbApi

@@ -8,11 +8,10 @@ import com.arctouch.codechallenge.util.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class GenresPresenterImpl(
-    private val service: TmdbApi = RetrofitConfig().apiService
-) : GenresPresenter {
+class GenresPresenterImpl : GenresPresenter {
+  private val service: TmdbApi = RetrofitConfig().apiService
 
-  override fun genres() {
+  override fun genresPresenterImpl() {
     service.genres(
         Constants.API_KEY,
         Constants.DEFAULT_LANGUAGE)

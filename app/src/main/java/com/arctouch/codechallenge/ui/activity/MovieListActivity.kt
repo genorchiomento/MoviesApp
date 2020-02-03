@@ -1,41 +1,62 @@
 package com.arctouch.codechallenge.ui.activity
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.arctouch.codechallenge.R
-import com.arctouch.codechallenge.data.Cache
-import com.arctouch.codechallenge.data.retrofit.TmdbApi
-import com.arctouch.codechallenge.ui.adapter.HomeAdapter
+import com.arctouch.codechallenge.data.model.Movie
+import com.arctouch.codechallenge.ui.adapter.MovieListAdapter
+import com.arctouch.codechallenge.ui.viewmodel.MovieListViewModel
 import com.arctouch.codechallenge.util.Constants
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.home_activity.*
-import org.koin.android.ext.android.inject
+import kotlinx.android.synthetic.main.movie_list_activity.*
 
 class MovieListActivity : AppCompatActivity() {
 
-  private val service: TmdbApi by inject()
+  private lateinit var viewModel: MovieListViewModel
+  private val adapter by lazy { MovieListAdapter() }
+  private var page: Long = Constants.PAGE
 
-  @SuppressLint("CheckResult")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.home_activity)
+    setContentView(R.layout.movie_list_activity)
 
-    service.upcomingMovies(
-        Constants.API_KEY,
-        Constants.DEFAULT_LANGUAGE,
-        1,
-        Constants.DEFAULT_REGION)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe {
-          val moviesWithGenres = it.results.map { movie ->
-            movie.copy(genres = Cache.genres.filter { movie.genreIds?.contains(it.id) == true })
-          }
-          recyclerView.adapter = HomeAdapter(moviesWithGenres)
-          progressBar.visibility = View.GONE
-        }
+    setListener()
   }
+
+  private fun setListener() {
+    configRecyclerView()
+    callViewModelObserver()
+    configUpComingMovies()
+  }
+
+  private fun configRecyclerView() {
+    recyclerViewMovieList.adapter = adapter
+  }
+
+  private fun callViewModelObserver() {
+    viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
+
+    viewModel.movieListLiveData.observe(this, Observer {
+
+      progressBarMovieList.visibility = View.GONE
+
+      isEqualsPage(it)
+    })
+  }
+
+  private fun isEqualsPage(it: List<Movie>) {
+    if (page == Constants.PAGE) adapter.movies = it else {
+      val helper: MutableList<Movie> = mutableListOf()
+      helper.addAll(adapter.movies)
+      helper.addAll(it)
+      adapter.movies = helper
+    }
+  }
+
+  private fun configUpComingMovies() {
+    viewModel.getUpcomingMovies(page)
+  }
+
 }

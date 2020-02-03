@@ -8,4 +8,5 @@ object Constants {
   const val URL_GENRE_LIST = "genre/movie/list"
   const val URL_UPCOMING = "movie/upcoming"
   const val URL_MOVIE = "movie/"
+  const val PAGE: Long = 1
 }

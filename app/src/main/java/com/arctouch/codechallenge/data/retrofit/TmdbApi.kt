@@ -19,9 +19,9 @@ interface TmdbApi {
 
   @GET(Constants.URL_UPCOMING)
   fun upcomingMovies(
+      @Query("page") page: Long,
       @Query("api_key") apiKey: String = Constants.API_KEY,
       @Query("language") language: String = Constants.DEFAULT_LANGUAGE,
-      @Query("page") page: Long,
       @Query("region") region: String = Constants.DEFAULT_REGION
   ): Observable<UpcomingMoviesResponse>
 

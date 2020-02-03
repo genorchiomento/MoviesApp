@@ -2,4 +2,7 @@
 <resources>
   <string name="toolbar_movie_list_title">Em Breve!</string>
   <string name="toolbar_movie_details_title">Sobre o filme</string>
+  <string name="msg_missing_detail_overview">Oh! Não encontramos sinopse para esse filme. =(</string>
+  <string name="msg_missing_detail_genre">Oh! Não encontramos gêneros para esse filme. =(</string>
+  <string name="msg_missing_detail_generic">N/A</string>
 </resources>

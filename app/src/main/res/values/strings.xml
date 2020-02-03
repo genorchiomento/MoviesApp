@@ -3,4 +3,7 @@
   <string name="movie_and_genres" translatable="false">%s - %s</string>
   <string name="toolbar_movie_list_title">Coming Soon!</string>
   <string name="toolbar_movie_details_title">About movie</string>
+  <string name="msg_missing_detail_overview">Oh! We not found overview to this movie. =(</string>
+  <string name="msg_missing_detail_genre">Oh! We not found genres to this movie. =(</string>
+  <string name="msg_missing_detail_generic">N/A</string>
 </resources>

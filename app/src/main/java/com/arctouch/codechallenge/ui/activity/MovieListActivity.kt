@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.home_activity.*
 import org.koin.android.ext.android.inject
 
-class HomeActivity : AppCompatActivity() {
+class MovieListActivity : AppCompatActivity() {
 
   private val service: TmdbApi by inject()
 

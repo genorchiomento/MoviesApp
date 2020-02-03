@@ -3,6 +3,7 @@ package com.arctouch.codechallenge.data.retrofit
 import com.arctouch.codechallenge.data.model.GenreResponse
 import com.arctouch.codechallenge.data.model.Movie
 import com.arctouch.codechallenge.data.model.UpcomingMoviesResponse
+import com.arctouch.codechallenge.util.Constants
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,24 +11,24 @@ import retrofit2.http.Query
 
 interface TmdbApi {
 
-  @GET("genre/movie/list")
+  @GET(Constants.URL_GENRE_LIST)
   fun genres(
-      @Query("api_key") apiKey: String,
-      @Query("language") language: String
+      @Query("api_key") apiKey: String = Constants.API_KEY,
+      @Query("language") language: String = Constants.DEFAULT_LANGUAGE
   ): Observable<GenreResponse>
 
-  @GET("movie/upcoming")
+  @GET(Constants.URL_UPCOMING)
   fun upcomingMovies(
-      @Query("api_key") apiKey: String,
-      @Query("language") language: String,
+      @Query("api_key") apiKey: String = Constants.API_KEY,
+      @Query("language") language: String = Constants.DEFAULT_LANGUAGE,
       @Query("page") page: Long,
-      @Query("region") region: String
+      @Query("region") region: String = Constants.DEFAULT_REGION
   ): Observable<UpcomingMoviesResponse>
 
-  @GET("movie/{id}")
+  @GET(Constants.URL_MOVIE + "{id}")
   fun movie(
       @Path("id") id: Long,
-      @Query("api_key") apiKey: String,
-      @Query("language") language: String
+      @Query("api_key") apiKey: String = Constants.API_KEY,
+      @Query("language") language: String = Constants.DEFAULT_LANGUAGE
   ): Observable<Movie>
 }

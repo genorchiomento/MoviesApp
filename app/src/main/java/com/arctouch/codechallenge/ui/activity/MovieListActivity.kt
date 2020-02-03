@@ -13,7 +13,7 @@ import com.arctouch.codechallenge.data.model.Movie
 import com.arctouch.codechallenge.ui.adapter.MovieListAdapter
 import com.arctouch.codechallenge.ui.viewmodel.MovieListViewModel
 import com.arctouch.codechallenge.util.Constants
-import kotlinx.android.synthetic.main.movie_list_activity.*
+import kotlinx.android.synthetic.main.activity_movie_list.*
 
 class MovieListActivity : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class MovieListActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.movie_list_activity)
+    setContentView(R.layout.activity_movie_list)
 
     setListener()
   }

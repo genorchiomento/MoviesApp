@@ -28,7 +28,7 @@ class MovieListActivity : AppCompatActivity() {
   private fun setListener() {
     configRecyclerView()
     callViewModelObserver()
-    configUpComingMovies()
+    viewModelListener()
   }
 
   private fun configRecyclerView() {
@@ -55,8 +55,8 @@ class MovieListActivity : AppCompatActivity() {
     }
   }
 
-  private fun configUpComingMovies() {
+  private fun viewModelListener() {
     viewModel.getUpcomingMovies(page)
+    viewModel.configScrollListener(recyclerViewMovieList)
   }
-
 }

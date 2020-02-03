@@ -2,9 +2,12 @@ package com.arctouch.codechallenge.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AbsListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.data.model.Movie
 import com.arctouch.codechallenge.ui.adapter.MovieListAdapter
@@ -17,6 +20,7 @@ class MovieListActivity : AppCompatActivity() {
   private lateinit var viewModel: MovieListViewModel
   private val adapter by lazy { MovieListAdapter() }
   private var page: Long = Constants.PAGE
+  private var isScroll: Boolean = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -29,6 +33,7 @@ class MovieListActivity : AppCompatActivity() {
     configRecyclerView()
     callViewModelObserver()
     viewModelListener()
+    configScrollListener()
   }
 
   private fun configRecyclerView() {
@@ -57,6 +62,33 @@ class MovieListActivity : AppCompatActivity() {
 
   private fun viewModelListener() {
     viewModel.getUpcomingMovies(page)
-    viewModel.configScrollListener(recyclerViewMovieList)
+  }
+
+  private fun configScrollListener() {
+
+    var layoutManager = recyclerViewMovieList.layoutManager as LinearLayoutManager
+
+    recyclerViewMovieList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+      override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        super.onScrollStateChanged(recyclerView, newState)
+        if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+          isScroll = true
+        }
+      }
+
+      override fun onScrolled(recyclerView: RecyclerView, hresult: Int, vresult: Int) {
+        super.onScrolled(recyclerView, hresult, vresult)
+        val visibleItemCount = layoutManager.childCount
+        val totalItemCount = layoutManager.itemCount
+        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+        val expectedTotal = firstVisibleItemPosition.let { visibleItemCount.plus(it) }
+
+        if (isScroll && expectedTotal == totalItemCount) {
+          isScroll = false
+          page = page.plus(1)
+          viewModel.getUpcomingMovies(page)
+        }
+      }
+    })
   }
 }

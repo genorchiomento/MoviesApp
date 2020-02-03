@@ -3,7 +3,6 @@ package com.arctouch.codechallenge.ui.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.AbsListView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +14,7 @@ import com.arctouch.codechallenge.ui.viewmodel.MovieListViewModel
 import com.arctouch.codechallenge.util.Constants
 import kotlinx.android.synthetic.main.activity_movie_list.*
 
-class MovieListActivity : AppCompatActivity() {
+class MovieListActivity : BaseActivity() {
 
   private lateinit var viewModel: MovieListViewModel
   private val adapter by lazy { MovieListAdapter() }
@@ -25,6 +24,8 @@ class MovieListActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_movie_list)
+
+    configToolbar(toolbarMovieList, getString(R.string.toolbar_movie_list_title))
 
     setListener()
   }

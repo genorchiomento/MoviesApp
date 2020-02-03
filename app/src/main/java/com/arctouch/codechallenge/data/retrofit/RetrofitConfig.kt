@@ -1,4 +1,4 @@
-package com.arctouch.codechallenge.api
+package com.arctouch.codechallenge.data.retrofit
 
 import com.arctouch.codechallenge.util.Constants
 import okhttp3.OkHttpClient

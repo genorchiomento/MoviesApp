@@ -1,5 +1,6 @@
 package com.arctouch.codechallenge.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AbsListView
@@ -39,6 +40,11 @@ class MovieListActivity : BaseActivity() {
 
   private fun configRecyclerView() {
     recyclerViewMovieList.adapter = adapter
+
+    adapter.setOnItemClickListener {
+      startActivity(Intent(this, MovieDetailsActivity::class.java)
+          .putExtra("id", it.id).putExtra("title", it.title))
+    }
   }
 
   private fun callViewModelObserver() {
@@ -49,6 +55,7 @@ class MovieListActivity : BaseActivity() {
       progressBarMovieList.visibility = View.GONE
 
       isEqualsPage(it)
+
     })
   }
 
@@ -92,4 +99,6 @@ class MovieListActivity : BaseActivity() {
       }
     })
   }
+
+  override fun onBackPressed() = Unit
 }

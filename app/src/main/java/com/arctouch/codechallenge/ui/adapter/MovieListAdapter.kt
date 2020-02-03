@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
+  private var onItemListener: (item: Movie) -> Unit = {}
+
   var movies: List<Movie> = emptyList<Movie>()
     set(value) {
       field = value
@@ -20,6 +22,12 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
     }
 
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    init {
+      itemView.setOnClickListener {
+        onItemListener(movies[adapterPosition])
+      }
+    }
 
     private val movieImageUrlBuilder = MovieImageUrlBuilder()
 
@@ -33,6 +41,10 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
           .apply(RequestOptions().placeholder(R.drawable.ic_image_placeholder))
           .into(itemView.posterImageView)
     }
+  }
+
+  fun setOnItemClickListener(listener: (item: Movie) -> Unit) {
+    onItemListener = listener
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

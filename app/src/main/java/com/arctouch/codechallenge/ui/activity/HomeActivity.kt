@@ -1,12 +1,13 @@
-package com.arctouch.codechallenge.home
+package com.arctouch.codechallenge.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.arctouch.codechallenge.R
-import com.arctouch.codechallenge.api.TmdbApi
 import com.arctouch.codechallenge.data.Cache
+import com.arctouch.codechallenge.data.retrofit.TmdbApi
+import com.arctouch.codechallenge.ui.adapter.HomeAdapter
 import com.arctouch.codechallenge.util.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

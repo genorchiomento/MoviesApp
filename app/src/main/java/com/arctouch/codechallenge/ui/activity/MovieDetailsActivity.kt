@@ -33,7 +33,7 @@ class MovieDetailsActivity : BaseActivity() {
 
   private fun setListeners(movieId: Int) {
     callViewModelObserver()
-    viewModelListener(movieId?.let { it })
+    viewModelListener(movieId.let { it })
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -44,7 +44,7 @@ class MovieDetailsActivity : BaseActivity() {
   }
 
   private fun viewModelListener(movieId: Int) {
-    viewModel.getMovieById(movieId?.let { it.toLong() })
+    viewModel.getMovieById(movieId.toLong())
   }
 
   private fun callViewModelObserver() {
@@ -76,7 +76,7 @@ class MovieDetailsActivity : BaseActivity() {
     if (it.genres.isNullOrEmpty()) {
       textViewMovieGenres.text = getString(R.string.msg_missing_detail_genre)
     } else {
-      textViewMovieGenres.text = it.genres?.joinToString(separator = " - ") { it.name }
+      textViewMovieGenres.text = it.genres.joinToString(separator = " - ") { it.name }
     }
   }
 

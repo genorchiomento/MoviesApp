@@ -1,5 +1,6 @@
 package com.arctouch.codechallenge
 
+import android.annotation.SuppressLint
 import android.app.Application
 import com.arctouch.codechallenge.data.Cache
 import com.arctouch.codechallenge.data.retrofit.RetrofitConfig
@@ -29,6 +30,7 @@ class AppApplication : Application() {
     getGenres()
   }
 
+  @SuppressLint("CheckResult")
   private fun getGenres() {
     service.genres(
         Constants.API_KEY,

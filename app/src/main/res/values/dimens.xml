@@ -7,11 +7,9 @@
   <dimen name="components_inline_8">8dp</dimen>
   <dimen name="components_inline_16">16dp</dimen>
   <dimen name="components_inline_24">24dp</dimen>
-  <dimen name="components_inline_32">32dp</dimen>
 
   <dimen name="components_stack_8">8dp</dimen>
   <dimen name="components_stack_16">16dp</dimen>
-  <dimen name="components_stack_24">24dp</dimen>
   <dimen name="components_stack_32">32dp</dimen>
 
   <!-- Fonts -->

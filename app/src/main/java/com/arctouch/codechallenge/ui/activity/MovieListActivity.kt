@@ -1,9 +1,13 @@
 package com.arctouch.codechallenge.ui.activity
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.AbsListView
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,10 +23,11 @@ import kotlinx.android.synthetic.main.activity_movie_list.*
 class MovieListActivity : BaseActivity() {
 
   private lateinit var viewModel: MovieListViewModel
+  private lateinit var searchViewMenu: SearchView
+
   private val adapter by lazy { MovieListAdapter() }
   private var page: Long = Constants.PAGE
   private var isScroll: Boolean = false
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_movie_list)
@@ -30,6 +35,36 @@ class MovieListActivity : BaseActivity() {
     configToolbar(toolbar as Toolbar, getString(R.string.toolbar_movie_list_title))
 
     setListener()
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    menuInflater.inflate(R.menu.search_menu, menu)
+
+    val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+    searchViewMenu = (menu.findItem(R.id.searchViewMenu).actionView as SearchView).apply {
+      setSearchableInfo(searchManager.getSearchableInfo(componentName))
+    }
+
+    configSearchViewMenu()
+
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  private fun configSearchViewMenu() {
+    searchViewMenu.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+      override fun onQueryTextChange(newText: String): Boolean {
+        if (newText.isNotEmpty()) {
+          viewModel.searchMovies(newText)
+        } else {
+          viewModel.getUpcomingMovies(page)
+        }
+        return true
+      }
+
+      override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+      }
+    })
   }
 
   private fun setListener() {
@@ -51,12 +86,15 @@ class MovieListActivity : BaseActivity() {
   private fun callViewModelObserver() {
     viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
 
-    viewModel.movieListLiveData.observe(this, Observer {
+    viewModel.movieListLiveData.observe(this, Observer { it ->
 
       progressBarMovieList.visibility = View.GONE
 
       isEqualsPage(it)
 
+      viewModel.searchMovieLiveData.observe(this, Observer {
+        adapter.movies = it
+      })
     })
   }
 
@@ -75,7 +113,7 @@ class MovieListActivity : BaseActivity() {
 
   private fun configScrollListener() {
 
-    var layoutManager = recyclerViewMovieList.layoutManager as LinearLayoutManager
+    val layoutManager = recyclerViewMovieList.layoutManager as LinearLayoutManager
 
     recyclerViewMovieList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

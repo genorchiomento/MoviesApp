@@ -6,4 +6,5 @@
   <string name="msg_missing_detail_overview">Oh! We not found overview to this movie. =(</string>
   <string name="msg_missing_detail_genre">Oh! We not found genres to this movie. =(</string>
   <string name="msg_missing_detail_generic">N/A</string>
+  <string name="menu_search_title">Search</string>
 </resources>

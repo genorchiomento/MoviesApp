@@ -5,4 +5,5 @@
   <string name="msg_missing_detail_overview">Oh! Não encontramos sinopse para esse filme. =(</string>
   <string name="msg_missing_detail_genre">Oh! Não encontramos gêneros para esse filme. =(</string>
   <string name="msg_missing_detail_generic">N/A</string>
+  <string name="menu_search_title">Pesquisar</string>
 </resources>

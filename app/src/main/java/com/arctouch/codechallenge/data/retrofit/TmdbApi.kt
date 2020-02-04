@@ -21,8 +21,7 @@ interface TmdbApi {
   fun upcomingMovies(
       @Query("page") page: Long,
       @Query("api_key") apiKey: String = Constants.API_KEY,
-      @Query("language") language: String = Constants.DEFAULT_LANGUAGE,
-      @Query("region") region: String = Constants.DEFAULT_REGION
+      @Query("language") language: String = Constants.DEFAULT_LANGUAGE
   ): Observable<UpcomingMoviesResponse>
 
   @GET(Constants.URL_MOVIE + "{id}")
@@ -31,4 +30,10 @@ interface TmdbApi {
       @Query("api_key") apiKey: String = Constants.API_KEY,
       @Query("language") language: String = Constants.DEFAULT_LANGUAGE
   ): Observable<Movie>
+
+  @GET(Constants.SEARCH_URL)
+  fun movieSearch(
+      @Query("query") title: String,
+      @Query("api_key") apiKey: String = Constants.API_KEY
+  ): Observable<UpcomingMoviesResponse>
 }

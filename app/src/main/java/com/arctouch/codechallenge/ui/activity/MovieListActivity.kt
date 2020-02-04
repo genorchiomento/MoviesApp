@@ -28,6 +28,7 @@ class MovieListActivity : BaseActivity() {
   private val adapter by lazy { MovieListAdapter() }
   private var page: Long = Constants.PAGE
   private var isScroll: Boolean = false
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_movie_list)
@@ -92,9 +93,10 @@ class MovieListActivity : BaseActivity() {
 
       isEqualsPage(it)
 
-      viewModel.searchMovieLiveData.observe(this, Observer {
-        adapter.movies = it
-      })
+    })
+
+    viewModel.searchMovieLiveData.observe(this, Observer {
+      adapter.movies = it
     })
   }
 

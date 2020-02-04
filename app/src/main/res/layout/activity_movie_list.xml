@@ -10,13 +10,13 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:clipToPadding="false"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp"
+    android:paddingTop="@dimen/components_stack_16"
+    android:paddingBottom="@dimen/components_stack_16"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/toolbarMovieList"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar"
     tools:itemCount="10"
     tools:listitem="@layout/movie_item" />
 
@@ -28,19 +28,11 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/toolbarMovieList"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar"
     tools:visibility="gone" />
 
-  <androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbarMovieList"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.0" />
+  <include
+    android:id="@+id/toolbar"
+    layout="@layout/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

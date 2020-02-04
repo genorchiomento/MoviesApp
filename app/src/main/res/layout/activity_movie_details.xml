@@ -6,18 +6,9 @@
   android:layout_height="match_parent"
   tools:context=".ui.activity.MovieDetailsActivity">
 
-  <androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbarMovieDetails"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.0"
-    tools:title="Toolbar title" />
+  <include
+    android:id="@+id/toolbar"
+    layout="@layout/toolbar" />
 
   <androidx.core.widget.NestedScrollView
     android:id="@+id/scrollView"
@@ -27,51 +18,54 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/toolbarMovieDetails"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar"
     app:layout_constraintVertical_bias="0.0">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/constraintDetails"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginBottom="32dp">
+      android:layout_marginBottom="@dimen/components_stack_32">
 
       <ImageView
         android:id="@+id/imageViewMovieBackdrop"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="centerCrop"
+        android:src="@drawable/ic_image_placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:src="@android:color/holo_blue_dark" />
+        app:layout_constraintVertical_bias="0.0" />
 
       <ImageView
         android:id="@+id/imageViewMoviePoster"
         android:layout_width="100dp"
         android:layout_height="150dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/components_stack_16"
         android:background="@android:color/white"
         android:padding="2dp"
         android:scaleType="fitCenter"
+        android:src="@drawable/ic_image_placeholder"
         app:layout_constraintBottom_toTopOf="@+id/textViewMovieTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageViewMovieBackdrop"
-        tools:src="@android:color/holo_red_dark" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewMovieBackdrop" />
 
       <TextView
         android:id="@+id/textViewMovieTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewMoviePoster"
+        android:layout_marginStart="@dimen/components_inline_16"
+        android:layout_marginTop="@dimen/components_stack_16"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:textAllCaps="true"
+        android:textSize="@dimen/components_font_22"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewMoviePoster"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewMovieBackdrop"
@@ -81,8 +75,10 @@
         android:id="@+id/textViewMovieRelease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/components_inline_24"
+        android:layout_marginTop="@dimen/components_stack_8"
+        android:fontFamily="sans-serif-light"
+        android:textSize="@dimen/components_font_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +89,7 @@
         android:id="@+id/viewDividerFirst"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/components_stack_16"
         android:background="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,9 +99,11 @@
         android:id="@+id/textViewMovieOverview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/components_inline_16"
+        android:layout_marginTop="@dimen/components_stack_16"
+        android:layout_marginEnd="@dimen/components_inline_16"
+        android:fontFamily="sans-serif-light"
+        android:textSize="@dimen/components_font_18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewDividerFirst"
@@ -115,7 +113,7 @@
         android:id="@+id/viewDividerSecond"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/components_stack_16"
         android:background="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,11 +123,13 @@
         android:id="@+id/textViewMovieGenres"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="@dimen/components_inline_16"
+        android:layout_marginTop="@dimen/components_stack_16"
+        android:layout_marginEnd="@dimen/components_inline_16"
+        android:layout_marginBottom="@dimen/components_stack_16"
+        android:fontFamily="monospace"
         android:gravity="center"
+        android:textSize="@dimen/components_font_18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="components_stack_4">4dp</dimen>
+  <dimen name="components_card_view_corner_radius">6dp</dimen>
+
+  <!-- width(inline) and height(stack) -->
+  <dimen name="components_inline_8">8dp</dimen>
+  <dimen name="components_inline_16">16dp</dimen>
+  <dimen name="components_inline_24">24dp</dimen>
+
+  <dimen name="components_stack_8">8dp</dimen>
+  <dimen name="components_stack_16">16dp</dimen>
+  <dimen name="components_stack_32">32dp</dimen>
+
+  <!-- Fonts -->
+  <dimen name="components_font_14">14sp</dimen>
+  <dimen name="components_font_18">18sp</dimen>
+  <dimen name="components_font_22">22sp</dimen>
+</resources>

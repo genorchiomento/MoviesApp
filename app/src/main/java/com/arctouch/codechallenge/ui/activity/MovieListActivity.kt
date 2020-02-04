@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AbsListView
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +27,7 @@ class MovieListActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_movie_list)
 
-    configToolbar(toolbarMovieList, getString(R.string.toolbar_movie_list_title))
+    configToolbar(toolbar as Toolbar, getString(R.string.toolbar_movie_list_title))
 
     setListener()
   }

@@ -2,6 +2,7 @@ package com.arctouch.codechallenge.ui.activity
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arctouch.codechallenge.R
@@ -25,7 +26,7 @@ class MovieDetailsActivity : BaseActivity() {
     val movieId = intent.extras?.getInt("id", 0)
     val movieTitle = intent.extras?.getString("title", getString(R.string.toolbar_movie_details_title))
 
-    configToolbar(toolbarMovieDetails, movieTitle.toString(), true)
+    configToolbar(toolbar as Toolbar, movieTitle.toString(), true)
 
     movieId?.let { setListeners(it) }
   }

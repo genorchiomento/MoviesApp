@@ -20,7 +20,7 @@ class MovieListViewModel : BaseViewModel() {
     service.upcomingMovies(page)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe {
+        .subscribe { it ->
           movieListLiveData.postValue(it.results.map { movie ->
             movie.copy(genres = Cache.genres.filter { movie.genreIds?.contains(it.id) == true })
           })
@@ -32,7 +32,7 @@ class MovieListViewModel : BaseViewModel() {
     service.movieSearch(title)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe {
+        .subscribe { it ->
           searchMovieLiveData.postValue(it.results.map { movie ->
             movie.copy(genres = Cache.genres.filter { movie.genreIds?.contains(it.id) == true })
           })
